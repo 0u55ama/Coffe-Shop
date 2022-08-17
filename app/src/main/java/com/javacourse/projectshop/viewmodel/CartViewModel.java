@@ -1,0 +1,47 @@
+package com.javacourse.projectshop.viewmodel;
+
+import android.app.Application;
+
+import androidx.annotation.NonNull;
+import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LiveData;
+
+import com.javacourse.projectshop.repository.CartRepo;
+import com.javacourse.projectshop.utils.model.ProductCart;
+
+import java.util.List;
+
+public class CartViewModel extends AndroidViewModel {
+
+    private CartRepo cartRepo;
+
+    public CartViewModel(@NonNull Application application) {
+        super(application);
+        cartRepo= new CartRepo(application);
+
+    }
+
+    public LiveData<List<ProductCart>> getAllCartItems(){
+        return cartRepo.getAllCartItemLiveData();
+    }
+
+    public void insertCartItem(ProductCart productCart){
+        cartRepo.insertCartItem(productCart);
+    }
+
+    public void updateQuantity(int id, int quantity){
+        cartRepo.updateQuantity(id, quantity);
+    }
+
+    public void updatePrice(int id, double price){
+        cartRepo.updatePrice(id, price);
+    }
+
+    public void deleteCartItem(ProductCart productCart){
+        cartRepo.deleteCartItem(productCart);
+    }
+
+    public void deleteAllItem(){
+        cartRepo.deleteAllItem();
+    }
+}
